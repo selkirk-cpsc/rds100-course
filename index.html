@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RDS 100: Introduction to Data Science</title>
+<style>
+  :root {
+    --bg: #f6f6f3; --panel: #ffffff; --ink: #1d1d1f; --muted: #6b6b72;
+    --line: #d6d6db; --accent: #2f6fde; --accent-soft: #dce8fd; --code-bg: #f1f1ee;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #141518; --panel: #1e1f23; --ink: #ececf0; --muted: #9b9ca5;
+      --line: #3a3b42; --accent: #6ea0ff; --accent-soft: #1d3157; --code-bg: #25262b;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #141518; --panel: #1e1f23; --ink: #ececf0; --muted: #9b9ca5;
+    --line: #3a3b42; --accent: #6ea0ff; --accent-soft: #1d3157; --code-bg: #25262b;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    background: var(--bg); color: var(--ink);
+    font: 17px/1.65 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  a { color: var(--accent); }
+  code, pre { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: .9em; }
+  :not(pre) > code { background: var(--code-bg); padding: .08em .3em; border-radius: 4px; overflow-wrap: anywhere; }
+  pre { background: var(--panel); border: 1px dashed var(--line); border-radius: 8px; padding: 12px 14px; overflow-x: auto; line-height: 1.5; }
+
+  .topbar { border-bottom: 1px solid var(--line); background: var(--panel); }
+  .topbar .in { max-width: 900px; margin: 0 auto; padding: 10px 16px; display: flex; gap: 16px; align-items: center; }
+  .topbar a { text-decoration: none; font-weight: 600; white-space: nowrap; }
+  .topbar .crumb { color: var(--muted); font-size: .9rem; }
+
+  main { max-width: 900px; margin: 0 auto; padding: 8px 16px 48px; }
+  header.title { margin: 28px 0 8px; }
+  header.title h1 { margin: 4px 0 0; font-size: 2.1rem; line-height: 1.2; }
+  nav.links { font-weight: 600; margin: 8px 0 16px; }
+  .soon { color: var(--muted); font-weight: 400; }
+
+  h2 { font-size: 1.6rem; margin: 2em 0 .4em; padding-bottom: .2em; border-bottom: 2px solid var(--line); }
+  h3 { font-size: 1.2rem; margin: 1.6em 0 .3em; }
+  p, li { max-width: 72ch; }
+  li { margin: .2em 0; }
+  .callout { background: var(--panel); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 8px; padding: 4px 16px; margin: 1em 0; }
+
+  table { border-collapse: collapse; margin: 1em 0; display: block; overflow-x: auto; max-width: 100%; width: fit-content; }
+  th, td { border: 1px solid var(--line); padding: 6px 10px; text-align: left; vertical-align: top; }
+  th { background: var(--panel); }
+  td.week { text-align: center; font-weight: 600; }
+  td ul { margin: 0; padding-left: 0; list-style: none; }
+  td li { margin: 0 0 .35em; }
+  td li:last-child { margin-bottom: 0; }
+  .res { font-size: .88rem; white-space: nowrap; }
+  .size { color: var(--muted); font-size: .88rem; }
+
+  .theme-toggle { font: inherit; font-size: .85rem; line-height: 1.2; background: var(--panel); color: var(--ink); border: 1px solid var(--line); border-radius: 999px; padding: 5px 12px; cursor: pointer; white-space: nowrap; margin-left: auto; }
+  .theme-toggle:hover { border-color: var(--ink); }
+  footer { margin-top: 48px; padding-top: 12px; border-top: 1px solid var(--line); color: var(--muted); font-size: .9rem; }
+
+  @media print {
+    :root, :root[data-theme] {
+      --bg: #ffffff; --panel: #ffffff; --ink: #1d1d1f; --muted: #6b6b72;
+      --line: #d6d6db; --accent: #2f6fde; --accent-soft: #eef3fd; --code-bg: #f6f6f3;
+    }
+    .topbar, .theme-toggle { display: none !important; }
+    main { max-width: none; padding: 0; }
+    table { overflow: visible; }
+  }
+</style>
+<script>
+  // apply a saved light/dark choice before the page draws (no flash)
+  try { var t = localStorage.getItem('rds100-theme'); if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t); } catch (e) {}
+</script>
+</head>
+<body>
+<div class="topbar"><div class="in">
+  <a href="./">RDS 100</a>
+  <span class="crumb">Schedule</span>
+  <button type="button" class="theme-toggle" id="theme-toggle">☾ Dark</button>
+</div></div>
+<main>
+<header class="title"><h1>RDS 100: Introduction to Data Science</h1></header>
+<nav class="links" aria-label="Site"><a href="./">Schedule</a> · <a href="./data/">Data sets</a> · <a href="https://python.datasciencebook.ca/">Textbook</a> · JupyterHub <span class="soon">(link coming soon)</span> · <a href="https://learn.selkirk.ca/">Moodle</a> · <a href="./licence/">Licence</a></nav>
+
+<p>RDS 100 is taught online. The lesson videos, check questions, grades and exact due dates
+are on <a href="https://learn.selkirk.ca/">Moodle</a>. The tutorials and assignments are
+notebooks on JupyterHub <span class="soon">(link coming soon)</span>. This site has the slides, the data sets used in the lessons, and a link to
+the free online textbook,
+<a href="https://python.datasciencebook.ca/"><em>Data Science: A First Introduction with Python</em></a>.</p>
+
+<div class="callout">
+<p><strong>Tutorials and assignments.</strong> Most weeks have two notebooks on JupyterHub.</p>
+<ul>
+<li>The <strong>tutorial</strong> is a code-along: you work through it while the tutorial video
+works through it on screen. It is graded for <strong>completion</strong>, not correctness.</li>
+<li>The <strong>assignment</strong> is done on your own, on a data set you have not seen. It is
+the week's real mark, graded on <strong>correctness</strong>.</li>
+</ul>
+<p>Do the tutorial first: it is the warm-up for the assignment. Both are due Sunday at 23:59 at
+the end of the <strong>following</strong> week. Week 12 is the exception: its notebooks are due
+at the end of week 12, because Midterm 2 comes next.</p>
+<p>Notebooks are numbered by week, so there is no 06 or 13 (review and midterm weeks), and week
+5 (Git) has a tutorial but no assignment.</p>
+</div>
+
+<p>Slides appear here as each week opens. <strong>Slides</strong> is the slide show (use the
+arrow keys); <strong>Page</strong> is the same deck as one long page, easier to search and print.</p>
+
+<table>
+<thead><tr><th>Week</th><th>Lessons</th><th>Notebooks on JupyterHub</th></tr></thead>
+<tbody>
+<tr><td class="week">1</td><td><ul><li>Intro to Data Science + Python Basics</li><li>Pandas: DataFrames, Series, Indexing</li></ul></td><td>Tutorial 01, Assignment 01<br><span class="size">due end of week 2</span></td></tr>
+<tr><td class="week">2</td><td><ul><li>Reading Local Files</li><li>Reading from the Web</li></ul></td><td>Tutorial 02, Assignment 02<br><span class="size">due end of week 3</span></td></tr>
+<tr><td class="week">3</td><td><ul><li>Wrangling: Filtering, Selecting & Transforming</li><li>Wrangling: Joining, Grouping & Reshaping</li></ul></td><td>Tutorial 03, Assignment 03<br><span class="size">due end of week 4</span></td></tr>
+<tr><td class="week">4</td><td><ul><li>Visualization: Intro & Plot Types</li><li>Visualization: Effective Design</li></ul></td><td>Tutorial 04, Assignment 04<br><span class="size">due end of week 5</span></td></tr>
+<tr><td class="week">5</td><td><ul><li>Git Basics</li><li>GitHub Collaboration</li></ul></td><td>Tutorial 05<br><span class="size">due end of week 6</span></td></tr>
+<tr><td class="week">6</td><td><ul><li>Review: Weeks 1–4</li><li><strong>Midterm 1</strong></li></ul></td><td></td></tr>
+<tr><td class="week">7</td><td><ul><li>Classification I: KNN Concept & Training</li><li>Classification I: Making Predictions</li></ul></td><td>Tutorial 07, Assignment 07<br><span class="size">due end of week 8</span></td></tr>
+<tr><td class="week">8</td><td><ul><li>Classification II: Evaluation & Cross-Validation</li><li>Classification II: Hyperparameter Tuning</li></ul></td><td>Tutorial 08, Assignment 08<br><span class="size">due end of week 9</span></td></tr>
+<tr><td class="week">9</td><td><ul><li>Regression I: KNN for Regression</li><li>Regression I: Evaluating Models (RMSE)</li></ul></td><td>Tutorial 09, Assignment 09<br><span class="size">due end of week 10</span></td></tr>
+<tr><td class="week">10</td><td><ul><li>Regression II: Simple Linear Regression</li><li>Regression II: Multivariable Model Selection</li></ul></td><td>Tutorial 10, Assignment 10<br><span class="size">due end of week 11</span></td></tr>
+<tr><td class="week">11</td><td><ul><li>Clustering: K-Means Concept & Algorithm</li><li>Clustering: Choosing K & Interpreting Results</li></ul></td><td>Tutorial 11, Assignment 11<br><span class="size">due end of week 12</span></td></tr>
+<tr><td class="week">12</td><td><ul><li>Inference: Populations & Sampling</li><li>Inference: Sampling Distributions</li></ul></td><td>Tutorial 12, Assignment 12<br><span class="size">due <strong>end of week 12</strong>, before Midterm 2</span></td></tr>
+<tr><td class="week">13</td><td><ul><li>Review: Weeks 7–12</li><li><strong>Midterm 2</strong></li></ul></td><td></td></tr>
+<tr><td class="week">14</td><td><ul><li>Inference: Bootstrapping & Confidence Intervals</li><li>Inference: Hypothesis Testing, p-Values & Course Wrap-Up</li></ul></td><td>Tutorial 14, Assignment 14<br><span class="size">due end of week 15</span></td></tr>
+<tr><td class="week">15</td><td><ul><li>Catch-up and final review</li></ul></td><td></td></tr>
+<tr><td class="week">16</td><td><ul><li><strong>Final exam</strong></li></ul></td><td></td></tr>
+</tbody>
+</table>
+
+<footer>RDS 100: Introduction to Data Science, Selkirk College. Adapted from UBC DSCI 100. Selkirk's additions are licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> and the UBC material under <a href="https://creativecommons.org/licenses/by/2.5/ca/">CC BY 2.5 CA</a>: see the <a href="./licence/">licence</a>.</footer>
+</main>
+<script>
+  // light/dark toggle: an explicit choice wins over the system setting
+  (function () {
+    var b = document.getElementById('theme-toggle'), r = document.documentElement;
+    function current() {
+      var t = r.getAttribute('data-theme');
+      return t || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    }
+    function show() {
+      var dark = current() === 'dark';
+      b.textContent = dark ? '☀ Light' : '☾ Dark';
+      b.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
+    }
+    b.addEventListener('click', function () {
+      var next = current() === 'dark' ? 'light' : 'dark';
+      r.setAttribute('data-theme', next);
+      try { localStorage.setItem('rds100-theme', next); } catch (e) {}
+      show();
+    });
+    show();
+  })();
+</script>
+</body>
+</html>
